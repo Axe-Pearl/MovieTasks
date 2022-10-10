@@ -62,4 +62,5 @@ img{
     border-radius: 4px;
     background-color: gray;
     padding: 0 8px;
+    cursor: pointer;
 }

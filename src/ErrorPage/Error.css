@@ -1,0 +1,8 @@
+.ErrorContainer{
+    background-color: white;
+}
+.ErrorContainer > h2{
+    color: white;
+    background-color: black;
+    padding: 5px;
+}

@@ -1,0 +1,92 @@
+.ModalViewer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+}
+.modalContainer{
+  z-index: 1;
+  width: 55rem;
+  height: 35rem;
+  background: white;
+  display: flex;
+  border-radius: 5px;
+  animation: animate 0.3s;
+  box-sizing: border-box;
+  padding: 15px;
+  overflow: scroll;
+}
+.content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@keyframes animate {
+    from {
+      transform: scale(0.5);
+    }
+    to {
+      transform: scale(1);
+    }
+}
+.imgContainer{
+    width: 600px;
+    height: 400px;
+}
+.imgContainer >  img{
+    margin-bottom: 5px;
+    height: 500px;
+}
+.movieDetails{
+    text-align: left;
+    margin: 5px;
+    width: 400px;
+    padding: 10px;
+}
+@media screen and (max-width: 900px) {
+    .modalContainer {
+      width: 35rem;
+    }
+    .imgContainer{
+        width: 200px;
+        height: 200px;
+    }
+    .imgContainer >  img{
+        margin-bottom: 5px;
+        height: 200px;
+    }
+    
+  }
+.tagline{
+    font-family: cursive;
+}
+.btn-container{
+    top: 7px;
+    right: 7px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+}
+.closeBox{
+    width: 25px;
+    height: 25px;
+    color: black;
+    font-weight: 200;
+    cursor: pointer;
+}
+
+.ageLimit{
+    background-color: gray;
+    width: 40px;
+    padding: 0px 8px;
+    margin: 5px 0;
+    margin-left:5px;
+}

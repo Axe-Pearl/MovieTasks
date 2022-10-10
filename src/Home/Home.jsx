@@ -1,8 +1,15 @@
 import React, { useState, useEffect} from 'react';
 import "./Home.css";
+import Loader from '../Loader/Loader';
+import Modal from '../Modal/Modal';
+import Error from '../ErrorPage/Error';
 
 function Home() {
     const [Movies, setMovies] = useState([]);
+    const [showModal, setshowModal] = useState(false);
+    const [selectedID, setselectedID] = useState();
+    const [isError, setisError]  = useState(false);
+    const [error, setError] = useState("");
     const url = "https://movie-task.vercel.app/api/popular?page=1";
     useEffect(()=>{
        const getApi = async ()=>{
@@ -14,17 +21,28 @@ function Home() {
            setMovies(moviesData);
          }
          catch(err){
-           console.log("Error: ", err);
+          setisError(true);
+          setError(err);
+          console.log("Error: ", err);
          }
        }
        getApi();
     },[]);
     console.log("All Movies here:", Movies);
+
+    const toggleOpen = (e)=>{
+        let id = e.target.value;
+        setselectedID(id);
+        setshowModal(true);
+    }
+    console.log("isError", isError);
   return (
     <div className='cards'>
-        { Movies.map((Movie)=>{
+      {isError === true ? <Error error = {error} />:
+      Movies.length === 0 ? <Loader /> : 
+         Movies.map((Movie, index)=>{
             return(
-                <div className='card'>
+                <div className='card' key={index}>
                 <div className='container'>
                     <img src= {`https://image.tmdb.org/t/p/original${Movie.backdrop_path}`} alt="" />
                 </div>
@@ -32,7 +50,7 @@ function Home() {
                     <div className='leftCol'>
                     <h3>{Movie.title}</h3>
                     <p>{(Movie.release_date).slice(0, 4)}</p>
-                    <button className='btn'>Learn More</button>
+                    <button className='btn' value={Movie.id} onClick={toggleOpen}>Learn More</button>
                     </div>
                     <div className='rightCol'>
                        <span>⭐{Movie.vote_average}</span>
@@ -42,8 +60,8 @@ function Home() {
             </div>
             )
         })
-       
         }
+        {showModal ? <Modal thisID = {selectedID} setshowModal = {setshowModal}/> : null }
     </div>
   )
 }
