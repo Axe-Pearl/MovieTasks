@@ -10,7 +10,7 @@ function Home() {
     const [selectedID, setselectedID] = useState();
   
     const [query, setQuery] = useState("");
-
+   
     
     console.log("All Movies here:", Movies);
 
@@ -26,7 +26,7 @@ function Home() {
       <Search setQuery={setQuery}/>
     </div>
     <div className='cards'>
-      {Movies.filter((Movie)=> Movie.title.toLowerCase().includes(query))
+      {Movies.filter((Movie)=> Movie.title.toLowerCase().includes(query.toLowerCase()))
       .map((Movie, index)=>{
             return(
                 <div className='card' key={index}>
