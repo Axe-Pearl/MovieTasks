@@ -7,6 +7,9 @@ body{
     display: grid;
     place-items: center center;
 }
+.SearchBox{
+    margin:30px;
+}
 .cards{
     display: grid;
     padding: 20px;
@@ -63,4 +66,9 @@ img{
     background-color: gray;
     padding: 0 8px;
     cursor: pointer;
+}
+
+.filterSection{
+    display: flex;
+    width: 200px;
 }

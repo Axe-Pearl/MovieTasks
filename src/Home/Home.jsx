@@ -1,33 +1,17 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useContext } from 'react';
 import "./Home.css";
-import Loader from '../Loader/Loader';
 import Modal from '../Modal/Modal';
-import Error from '../ErrorPage/Error';
+import { Movie } from "../App";
+import Search from '../Search/Search';
 
 function Home() {
-    const [Movies, setMovies] = useState([]);
+    const [Movies, ] = useContext(Movie);
     const [showModal, setshowModal] = useState(false);
     const [selectedID, setselectedID] = useState();
-    const [isError, setisError]  = useState(false);
-    const [error, setError] = useState("");
-    const url = "https://movie-task.vercel.app/api/popular?page=1";
-    useEffect(()=>{
-       const getApi = async ()=>{
-         try{
-           const response = await fetch(url);
-           const apiData = await response.json();
-           const moviesData = apiData.data.results;
-           console.log("apiData: ", apiData);
-           setMovies(moviesData);
-         }
-         catch(err){
-          setisError(true);
-          setError(err);
-          console.log("Error: ", err);
-         }
-       }
-       getApi();
-    },[]);
+  
+    const [query, setQuery] = useState("");
+
+    
     console.log("All Movies here:", Movies);
 
     const toggleOpen = (e)=>{
@@ -35,12 +19,15 @@ function Home() {
         setselectedID(id);
         setshowModal(true);
     }
-    console.log("isError", isError);
+    
   return (
+    <div style = {{display:"flex", flexDirection:"column", justifyContent:"center"}}>
+    <div className='filterSection'>
+      <Search setQuery={setQuery}/>
+    </div>
     <div className='cards'>
-      {isError === true ? <Error error = {error} />:
-      Movies.length === 0 ? <Loader /> : 
-         Movies.map((Movie, index)=>{
+      {Movies.filter((Movie)=> Movie.title.toLowerCase().includes(query))
+      .map((Movie, index)=>{
             return(
                 <div className='card' key={index}>
                 <div className='container'>
@@ -62,6 +49,7 @@ function Home() {
         })
         }
         {showModal ? <Modal thisID = {selectedID} setshowModal = {setshowModal}/> : null }
+    </div>
     </div>
   )
 }

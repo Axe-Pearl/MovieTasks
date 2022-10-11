@@ -28,7 +28,6 @@
   justify-content: center;
 }
 
-
 @keyframes animate {
     from {
       transform: scale(0.5);
