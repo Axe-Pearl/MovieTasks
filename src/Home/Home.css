@@ -7,6 +7,13 @@ body{
     display: grid;
     place-items: center center;
 }
+.homeContainer{
+    display: flex;
+    flex-direction: column;
+}
+.main{
+    display: flex;
+}
 .SearchBox{
     margin:30px;
 }
@@ -16,59 +23,36 @@ body{
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap:40px;
 }
-.card{
-    background-color: black;
-    border-radius: 20px 20px 0 0;
-}
-.container{
-    position: relative;
-}
-
-img{
-    width: 100%;
-    display: block;
-    border-radius: 20px 20px 0 0;
-}
-
-.details{
-    display: flex;
-    justify-content: space-between;
-    text-align: start;
-    margin: 10px;
-}
-.leftCol > h3{
-    color:white;
-    font-weight: 600;
-    font-size: 18px;
-    margin: 5px 0;
-}
-.leftCol > p{
-    color: white;
-    font-size: 14px;
-    margin: 5px 0;
-}
-.rightCol > span{
-    color:white;
-    margin: 5px 0;
-}
-.ageLimit{
-    background-color: gray;
-    width: 40px;
-    padding: 0px 8px;
-    margin: 5px 0;
-    margin-left:5px;
-}
-
-.btn{
-    margin: 20px 0;
-    height: 40px;
-    border-radius: 4px;
-    background-color: gray;
-    padding: 0 8px;
-    cursor: pointer;
-}
-
-.filterSection{
+.searchSection{
     display: flex;
     width: 200px;
+    align-items: center;
+}
+@media screen and (max-width:900px){
+   .searchSection{
+    padding-left: 10px;
+   }
+}
+
+.menuButton{
+    display: none;
+    font-size: 30px;
+}
+
+@media screen and (max-width:900px){
+    .menuButton{
+        display: block;
+    }
+}
+
+.filterContainer[dragIn]{
+   animation: drag-in 0.5s ease-in;
+}
+@keyframes drag-in {
+    from{
+        transform: translate(0px);
+    }
+    to{
+        transform: translate(-300px);
+    }
 }

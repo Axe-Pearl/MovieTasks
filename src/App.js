@@ -5,10 +5,12 @@ import Loader from './Loader/Loader';
 import Error from './ErrorPage/Error';
 
 export const Movie = createContext();
+export const thisMovie = createContext();
 
 function App() {
   const [Movies, setMovies] = useState([]);
   const [isError, setisError]  = useState(false);
+  
   useEffect(()=>{
     const url = "https://movie-task.vercel.app/api/popular?page=1";
     const getApi = async ()=>{

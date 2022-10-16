@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from 'react';
-import  ReactDOM  from 'react-dom';
 import Loader from '../Loader/Loader';
 import Error from '../ErrorPage/Error';
 import "./Modal.css";
@@ -24,11 +23,22 @@ function Modal({thisID, setshowModal}) {
      }
      getmovieApi();
   },[thisID])
+  
+
+  const closeModal = ()=>{
+    let modal = document.querySelector(".ModalViewer");
+    modal.setAttribute("animateClose","")
+    modal.addEventListener("animationend",()=>{
+      modal.removeAttribute("animateClose");
+      setshowModal(false);
+    },
+    { once: true }
+    )
+  }
   const size = Object.keys(selectedMovie).length;
   console.log("Selected Movie: ", selectedMovie);
   
-  // we will render the modal.jsx in the portal div
-  return ReactDOM.createPortal(
+  return (
     <div className='ModalViewer'>
       {size === 0 && !isError ?  <Loader /> :<>
       <div className='modalContainer'>
@@ -67,14 +77,13 @@ function Modal({thisID, setshowModal}) {
 
       {/* close popup */}
       <div className='btn-container'>
-      <button className='closeBox' onClick={() => setshowModal(false)}>X</button>
+      <button className='closeBox' onClick={closeModal}>X</button>
       </div>
 
       </div>
       </>
       }
-    </div>,
-    document.getElementById("portal")
+    </div>
   );
 }
 

@@ -89,3 +89,15 @@
     margin: 5px 0;
     margin-left:5px;
 }
+
+.ModalViewer[animateClose]{
+  animation: close 1s ease-in;
+}
+@keyframes close{
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
